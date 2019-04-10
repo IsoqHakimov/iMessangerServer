@@ -138,7 +138,6 @@ fun Application.module(testing: Boolean = false) {
         post("api/reg") {
 
             var user = User()
-            //val gson = Gson()
 
             var format: String?
             var filename: String? = ""
