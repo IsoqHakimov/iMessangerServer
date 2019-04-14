@@ -23,6 +23,7 @@ import io.ktor.http.content.forEachPart
 import io.ktor.http.content.streamProvider
 import io.ktor.util.KtorExperimentalAPI
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
+import org.slf4j.event.Level
 import java.io.File
 import java.io.FileInputStream
 import java.util.*
@@ -75,6 +76,13 @@ fun Application.module(testing: Boolean = false) {
         gson {
 
         }
+    }
+
+    install(CallLogging) {
+        level = Level.INFO
+        filter { call -> call.request.path().startsWith("/api") }
+        filter { call -> call.request.path().startsWith("/ws") }
+        filter { call -> call.request.path().startsWith("/test") }
     }
 
     routing {
