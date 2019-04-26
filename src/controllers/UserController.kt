@@ -12,8 +12,8 @@ object UserController {
         val c = if (!connection.isConnected())
             connection.connect().get() else connection
 
-        val query = "insert into users (name, surname, phone, uid, image, active)\n" +
-                "values ( ?, ?,'${user.phone}','${user.uid}','${user.image}',1);"
+        val query = "insert into users (name, surname, phone, uid, image, active, regDate)\n" +
+                "values ( ?, ?,'${user.phone}','${user.uid}','${user.image}',1, ${System.currentTimeMillis()});"
 
         c.sendPreparedStatementAwait(query, arrayListOf(user.name, user.surname))
 

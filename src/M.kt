@@ -1,8 +1,11 @@
 package com.imes
 
+import com.google.gson.JsonObject
+
 
 data class BaseResponse<T>(val code: Int, val result: T?, val error: String?)
-data class Response(val code: Int, val result: Any?, val error: String?)
+data class Response(val code: Int, val result: JsonObject?, val error: String?)
+data class ChatSession(val id: String)
 data class User(
     val id: Long? = null,
     val name: String? = null,
@@ -12,6 +15,11 @@ data class User(
     var image: String? = null,
     var active: Int? = null,
     var date: Long? = null
+)
+
+data class UserWrapper(
+    val users: ArrayList<User>? = null,
+    val count: Long? = null
 )
 
 data class Message(
@@ -34,4 +42,19 @@ data class Contact(
 
 data class ContactsWrapper(
     val contacts: ArrayList<Contact>? = null
+)
+
+data class UsersStats(
+    val time: Long? = null,
+    val count: Long? = null
+)
+
+data class Spam(
+    val id: Long? = null,
+    val text: String? = null
+)
+
+data class SpamWrapper(
+    val spams: ArrayList<Spam>? = null,
+    val count: Long? = null
 )
